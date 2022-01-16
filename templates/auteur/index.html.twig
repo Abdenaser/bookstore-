@@ -3,7 +3,7 @@
 {% block title %}Auteur index{% endblock %}
 
 {% block body %}
-    <h1>Auteur index</h1>
+    <h1 class="btn btn-success">Auteur</h1>
 
     <table class="table">
         <thead>
@@ -25,8 +25,8 @@
                 <td>{{ auteur.dateDeNaissance ? auteur.dateDeNaissance|date('Y-m-d') : '' }}</td>
                 <td>{{ auteur.nationalite }}</td>
                 <td>
-                    <a href="{{ path('auteur_show', {'id': auteur.id}) }}">show</a>
-                    <a href="{{ path('auteur_edit', {'id': auteur.id}) }}">edit</a>
+                    <a href="{{ path('auteur_show', {'id': auteur.id}) }}" class="btn btn-primary">show</a>
+                    <a href="{{ path('auteur_edit', {'id': auteur.id}) }}" class="btn btn-secondary">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +37,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('auteur_new') }}">Create new</a>
+    <a href="{{ path('auteur_new') }}" class="btn btn-primary">Create new</a>
 {% endblock %}

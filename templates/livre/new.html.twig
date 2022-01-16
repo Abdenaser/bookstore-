@@ -3,9 +3,9 @@
 {% block title %}New Livre{% endblock %}
 
 {% block body %}
-    <h1>Create new Livre</h1>
+    <h1 class="btn btn-primary">Create new Livre</h1>
 
     {{ include('livre/_form.html.twig') }}
 
-    <a href="{{ path('livre_index') }}">back to list</a>
+    <a href="{{ path('livre_index') }}" class="btn btn-secondary">back to list</a>
 {% endblock %}

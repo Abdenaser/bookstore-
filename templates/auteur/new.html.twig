@@ -3,9 +3,9 @@
 {% block title %}New Auteur{% endblock %}
 
 {% block body %}
-    <h1>Create new Auteur</h1>
+    <h1 class="btn btn-primary">Create new Auteur</h1>
 
     {{ include('auteur/_form.html.twig') }}
 
-    <a href="{{ path('auteur_index') }}">back to list</a>
+    <a href="{{ path('auteur_index') }}" class="btn btn-secondary">back to list</a>
 {% endblock %}

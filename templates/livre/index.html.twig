@@ -4,35 +4,41 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Livres</h1>
-	<form method="POST" onsubmit="chercher(event)">
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h1 class="btn btn-success">Livres</h1>
+	<form method="GET" onsubmit="chercher(event)">
 		<span>Chercher</span>
 		<input id="motCle" type="text" class="form-control">
 		<button class="btn btn-primary my-2">Chercher</button>
 	</form>
-
-	<form method="POST" onsubmit="list(event)">
+    
+    </div>
+    <div class="col-sm">
+     <form method="GET" onsubmit="list(event)">
 		<span>Lister les livres dont la date de parution est comprise entre deux années données
 		</span>
 		<input id="dateMin" type="number" class="form-control">
 		<input id="dateMax" type="number" class="form-control">
 		<button class="btn btn-primary my-2">Lister</button>
 	</form>
-
-	<span>Filter selon</span>
+    </div>
+    <div class="col-sm">
+      <span>Filter selon</span>
 	<select class="form-select mt-2" onchange="filtrerParNote(event)">
 		<option selected>Note</option>
 		{% for i in 0..20 %}
 			<option value="{{ i }}">{{ i }}</option>
 		{% endfor %}
 	</select>
-	<select class="form-select mt-2" onchange="filtrerParDate(event)">
+    <select class="form-select mt-2" onchange="filtrerParDate(event)">
 		<option selected>Date de publication</option>
 		{% for date in dates|sort  %}
 			<option value="{{date.date_de_parution|date("m/d/Y")}}">{{date.date_de_parution|date("m/d/Y")}}</option>
 		{% endfor %}
 	</select>
-	<select class="form-select mt-2" onchange="filtrerParAuteur(event)">
+    <select class="form-select mt-2" onchange="filtrerParAuteur(event)">
 		<option selected>Auteur</option>
 		{% for auteur in auteurs %}
 			<option value="{{auteur.id}}">{{auteur.nomPrenom}}</option>
@@ -44,6 +50,9 @@
 			<option value="{{genre.id}}">{{genre.nom}}</option>
 		{% endfor %}
 	</select>
+    </div>
+  </div>
+
 	<table id="livres" class="table mt-5">
 		<thead>
 			<tr>
@@ -52,6 +61,7 @@
 				<th>Nombre de pages</th>
 				<th>Date de parution</th>
 				<th>Note</th>
+                
 				<th></th>
 			</tr>
 		</thead>
@@ -67,11 +77,11 @@
 						<span id="livre-note-{{ livre.id }}">{{ livre.note }}</span>
 					</td>
 
-
+                   
 					<td>
 						<a class="btn btn-primary" href="{{ path('livre_show', {'id': livre.id}) }}">Afficher</a>
 						{% if is_granted('ROLE_ADMIN') %}
-							<a class="btn btn-primary" href="{{ path('livre_edit', {'id': livre.id}) }}">Modifier</a>
+							<a class="btn btn-danger" href="{{ path('livre_edit', {'id': livre.id}) }}">Modifier</a>
 							{{ include('livre/_delete_form.html.twig') }}
 						{% endif %}
 					</td>
@@ -87,7 +97,9 @@
 	{% if is_granted('ROLE_ADMIN') %}
 		<a class="btn btn-primary" href="{{ path('livre_new') }}">Ajouter</a>
 	{% endif %}
+</div>
 {% endblock %}
+
 {% block javascripts %}
 	<script src="/js/main.js"></script>
 {% endblock %}
